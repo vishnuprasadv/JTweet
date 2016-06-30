@@ -23,17 +23,28 @@ public final class SearchQuery {
 
 	}
 
-	public String buildSearchQuery() throws UnsupportedEncodingException {
-		return "?f=realtime&q=" + URLEncoder.encode(this.addParameter("from", this.userName)
-				+ this.addParameter("since", this.fromDate) + this.addParameter("until", this.untilDate), "UTF-8")
-				+ SearchQuery.SUFFIX;
+	public String buildSearchQuery() {
+		try {
+			return "?f=realtime&q=" + URLEncoder.encode(this.addParameter("from", this.userName)
+					+ this.addParameter("since", this.fromDate) + this.addParameter("until", this.untilDate), "UTF-8")
+					+ SearchQuery.SUFFIX;
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
-	public String buildSearchQuery(String searchTerm) throws UnsupportedEncodingException {
-		return "?f=realtime&q="
-				+ URLEncoder.encode(this.addParameter("from", this.userName) + this.addParameter("since", this.fromDate)
-						+ this.addParameter("until", this.untilDate) + " " + searchTerm, "UTF-8")
-				+ "&" + SearchQuery.SUFFIX;
+	public String buildSearchQuery(String searchTerm) {
+		try {
+			return "?f=realtime&q="
+					+ URLEncoder
+							.encode(this.addParameter("from", this.userName) + this.addParameter("since", this.fromDate)
+									+ this.addParameter("until", this.untilDate) + " " + searchTerm, "UTF-8")
+					+ "&" + SearchQuery.SUFFIX;
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	/**
