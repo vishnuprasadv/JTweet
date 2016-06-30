@@ -29,7 +29,7 @@ public class DataBot {
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection.setRequestMethod("GET");
 		connection.setRequestProperty("Accept", "application/json");
-		connection.setRequestProperty("User-Agent", "Databot /u/vishnuprasadv");
+		connection.setRequestProperty("User-Agent", "MSIE 10 /u/vishnuprasadv");
 		if (connection.getResponseCode() != 200) {
 			throw new IOException("Response doesn't indicate success. Received code : " + connection.getResponseCode());
 		}

@@ -24,9 +24,9 @@ public final class SearchQuery {
 	public String buildSearchQuery() {
 		try {
 			return "?f=realtime&q=" + URLEncoder.encode(this.addParameter("from", this.userName)
-					+ "&" + this.addParameter("since", this.fromDate) + "&"
+					+ " " + this.addParameter("since", this.fromDate) + " "
 					+ this.addParameter("until", this.untilDate), "UTF-8")
-					+ SearchQuery.SUFFIX;
+					+ "&" + SearchQuery.SUFFIX;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 			return null;
@@ -37,8 +37,8 @@ public final class SearchQuery {
 		try {
 			return "?f=realtime&q="
 					+ URLEncoder
-							.encode(this.addParameter("from", this.userName) + "&"
-									+ this.addParameter("since", this.fromDate) + "&"
+							.encode(this.addParameter("from", this.userName) + " "
+									+ this.addParameter("since", this.fromDate) + " "
 									+ this.addParameter("until", this.untilDate) + " " + searchTerm, "UTF-8")
 					+ "&" + SearchQuery.SUFFIX;
 		} catch (UnsupportedEncodingException e) {

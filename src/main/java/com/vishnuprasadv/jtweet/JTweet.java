@@ -28,6 +28,7 @@ public class JTweet {
 		if (this.searchQuery == null) {
 			return null;
 		}
+		searchQuery = searchQuery.replaceAll("\\+", "%20");
 		DataBot bot = new DataBot(JTweet.urlPrefix);
 		String json = bot.retrieveData(searchQuery);
 		JSONObject result = new JSONObject(json);
