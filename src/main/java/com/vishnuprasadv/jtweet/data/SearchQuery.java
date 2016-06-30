@@ -9,8 +9,6 @@ import java.net.URLEncoder;
  */
 public final class SearchQuery {
 	
-	private String query;
-	
 	private String userName;
 	private String fromDate;
 	private String untilDate;
@@ -26,7 +24,8 @@ public final class SearchQuery {
 	public String buildSearchQuery() {
 		try {
 			return "?f=realtime&q=" + URLEncoder.encode(this.addParameter("from", this.userName)
-					+ this.addParameter("since", this.fromDate) + this.addParameter("until", this.untilDate), "UTF-8")
+					+ "&" + this.addParameter("since", this.fromDate) + "&"
+					+ this.addParameter("until", this.untilDate), "UTF-8")
 					+ SearchQuery.SUFFIX;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -38,7 +37,8 @@ public final class SearchQuery {
 		try {
 			return "?f=realtime&q="
 					+ URLEncoder
-							.encode(this.addParameter("from", this.userName) + this.addParameter("since", this.fromDate)
+							.encode(this.addParameter("from", this.userName) + "&"
+									+ this.addParameter("since", this.fromDate) + "&"
 									+ this.addParameter("until", this.untilDate) + " " + searchTerm, "UTF-8")
 					+ "&" + SearchQuery.SUFFIX;
 		} catch (UnsupportedEncodingException e) {
@@ -59,7 +59,7 @@ public final class SearchQuery {
 	}
 
 	private String addParameter(String key, String value) {
-		return this.query + "&" + key + ":" + value;
+		return key + ":" + value;
 	}
 
 	/**
