@@ -26,4 +26,13 @@ public class SearchQueryTest extends TestCase {
 
 	}
 
+	public void testBuildQueryWithSearchTerm() {
+		String exp = "?f=realtime&q=from%3Ahello%20since%3A2015-01-01%20until%3A2016-01-01%20searchTerm&src=typd&max_position=";
+		SearchQuery query = new SearchQuery("hello", "2015-01-01", "2016-01-01");
+		String result = query.buildSearchQuery("searchTerm");
+		result = result.replaceAll("\\+", "%20");
+		assertTrue(result.equals(exp));
+
+	}
+
 }

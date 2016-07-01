@@ -1,5 +1,11 @@
 package com.vishnuprasadv.jtweet.model;
 
+/**
+ * Contains constant value used by the {@code TweetParser}
+ * 
+ * @author vishnuprasadv
+ * 
+ */
 public interface AttrConstant {
 	String tweetID = "data-tweet-id";
 	String tweetUserHandle = "span.username.js-action-profile-name b";
@@ -13,4 +19,10 @@ public interface AttrConstant {
 	String tweetGeo = "span.Tweet-geo";
 	String tweetGeoTitle = "title";
 	String tweetStream = "div.js-stream-tweet";
+	String tweetPagination = "min_position";
+	String tweetItems = "items_html";
+	String twitterUrl = "https://twitter.com";
+	String tweetFrom = "from";
+	String tweetSince = "since";
+	String tweetUntil = "until";
 }

@@ -3,8 +3,10 @@ package com.vishnuprasadv.jtweet.data;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import com.vishnuprasadv.jtweet.model.AttrConstant;
+
 /**
- * @author Vishnu Prasad
+ * @author vishnuprasadv
  *
  */
 public final class SearchQuery {
@@ -14,33 +16,24 @@ public final class SearchQuery {
 	private String untilDate;
 	private String searchTerm;
 	
-	private static final String SUFFIX = "src=typd&max_position=";
+	/**
+	 * URL suffix to be appended
+	 */
+	private static final String urlSuffix = "src=typd&max_position=";
 	
 
-	public SearchQuery(){
-
-	}
-
+	/**
+	 * Creates a search query for data retrieval
+	 * 
+	 * @return Query string
+	 */
 	public String buildSearchQuery() {
 		try {
-			return "?f=realtime&q=" + URLEncoder.encode(this.addParameter("from", this.userName)
-					+ " " + this.addParameter("since", this.fromDate) + " "
-					+ this.addParameter("until", this.untilDate), "UTF-8")
-					+ "&" + SearchQuery.SUFFIX;
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	public String buildSearchQuery(String searchTerm) {
-		try {
 			return "?f=realtime&q="
-					+ URLEncoder
-							.encode(this.addParameter("from", this.userName) + " "
-									+ this.addParameter("since", this.fromDate) + " "
-									+ this.addParameter("until", this.untilDate) + " " + searchTerm, "UTF-8")
-					+ "&" + SearchQuery.SUFFIX;
+					+ URLEncoder.encode(this.addParameter(AttrConstant.tweetFrom, this.userName) + " "
+							+ this.addParameter(AttrConstant.tweetSince, this.fromDate) + " "
+							+ this.addParameter(AttrConstant.tweetUntil, this.untilDate), "UTF-8")
+					+ "&" + SearchQuery.urlSuffix;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 			return null;
@@ -48,9 +41,36 @@ public final class SearchQuery {
 	}
 
 	/**
+	 * Creates a search query for data retrieval along with the search term
+	 * 
+	 * @param searchTerm
+	 *            search term to be included in the query
+	 * @return Query string
+	 */
+	public String buildSearchQuery(String searchTerm) {
+		try {
+			return "?f=realtime&q="
+					+ URLEncoder
+							.encode(this.addParameter(AttrConstant.tweetFrom, this.userName) + " "
+									+ this.addParameter(AttrConstant.tweetSince, this.fromDate) + " "
+									+ this.addParameter(AttrConstant.tweetUntil, this.untilDate) + " " + searchTerm,
+									"UTF-8")
+					+ "&" + SearchQuery.urlSuffix;
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * Constructs a {@code SearchQuery} with given member values
+	 * 
 	 * @param userName
+	 *            twitter user handle
 	 * @param fromDate
+	 *            from date {@code format: yyyy-mm-dd}
 	 * @param untilDate
+	 *            until date {@code format: yyyy-mm-dd}
 	 */
 	public SearchQuery(String userName, String fromDate, String untilDate) {
 		this.userName = userName;
@@ -58,6 +78,15 @@ public final class SearchQuery {
 		this.untilDate = untilDate;
 	}
 
+	/**
+	 * create a URL encoded parameter string with given key and value
+	 * 
+	 * @param key
+	 *            key value
+	 * @param value
+	 *            value of the key
+	 * @return URL encoded string
+	 */
 	private String addParameter(String key, String value) {
 		return key + ":" + value;
 	}

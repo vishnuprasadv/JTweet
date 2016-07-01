@@ -2,6 +2,12 @@ package com.vishnuprasadv.jtweet.model;
 
 import java.util.Date;
 
+/**
+ * Tweet model class
+ * 
+ * @author vishnuprasadv
+ *
+ */
 public class Tweet {
 
 	private String tweetId;
